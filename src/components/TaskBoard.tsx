@@ -1,7 +1,23 @@
 import React from 'react';
 import TaskCard from './TaskCard';
 
-export default function TaskBoard({ tasks, onStatusChange, onNotify, onAddToAgenda }) {
+type Task = {
+  id: string | number;
+  title: string;
+  description: string;
+  due_date?: string;
+  assigned_to_name?: string;
+  status: string;
+};
+
+interface TaskBoardProps {
+  tasks: Task[];
+  onStatusChange: (taskId: string | number, newStatus: string) => void;
+  onNotify: (taskId: string | number) => void;
+  onAddToAgenda: (taskId: string | number) => void;
+}
+
+export default function TaskBoard({ tasks, onStatusChange, onNotify, onAddToAgenda }: TaskBoardProps) {
   const statusColumns = ['A Faire', 'En Cours', 'En Attente', 'Terminé'];
   return (
     <div className="kanban-board">
