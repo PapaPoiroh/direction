@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import nodemailer from 'nodemailer';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -7,20 +6,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   const { to, task, status } = req.body;
 
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASS,
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json'
     },
+    body: JSON.stringify({
+      from: 'direction@ton-domaine.com',
+      to,
+      subject: `Mise √† jour t√¢che : ${task.title}`,
+      text: `La t√¢che "${task.title}" est maintenant "${status}". Lien: ...`
+    })
   });
 
-  await transporter.sendMail({
-    from: process.env.MAIL_USER,
-    to,
-    subject: `Mise ‡ jour t‚che : ${task.title}`,
-    text: `La t‚che "${task.title}" est maintenant "${status}". Lien: ...`,
-  });
-
+  if (!response.ok) {
+    return res.status(500).json({ error: 'Erreur lors de l‚Äôenvoi du mail' });
+  }
   res.status(200).json({ success: true });
 }
