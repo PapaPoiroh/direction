@@ -1,7 +1,25 @@
 import React from 'react';
 
-export default function Ged({ sections, documents, onAddSection, onAddDocument }) {
-  // sections : liste des rubriques GED, documents : liste des documents
+type Section = {
+  id: string | number;
+  title: string;
+};
+
+type Document = {
+  id: string | number;
+  section_id: string | number;
+  url: string;
+  title: string;
+};
+
+interface GedProps {
+  sections: Section[];
+  documents: Document[];
+  onAddSection: () => void;
+  onAddDocument: () => void;
+}
+
+export default function Ged({ sections, documents, onAddSection, onAddDocument }: GedProps) {
   return (
     <div className="ged">
       {sections.map(section => (
