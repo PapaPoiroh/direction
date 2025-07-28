@@ -1,7 +1,16 @@
-// Ce fichier ne doit plus contenir d'import Node.js
-// Remplace son contenu par un appel fetch vers l'API Next.js si tu as besoin côté client
+// Définis le type attendu pour task (adapte selon tes besoins réels)
+type Task = {
+  title: string;
+  description: string;
+  start: string; // date ISO
+  end: string;   // date ISO
+  // Ajoute d'autres champs si besoin
+};
 
-export async function addEventToGoogleCalendar(task, userOAuthToken) {
+export async function addEventToGoogleCalendar(
+  task: Task,
+  userOAuthToken: string
+): Promise<any> {
   const response = await fetch('/api/addToCalendar', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
