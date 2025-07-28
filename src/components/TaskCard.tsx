@@ -1,6 +1,22 @@
 import React from 'react';
 
-export default function TaskCard({ task, onStatusChange, onNotify, onAddToAgenda }) {
+type Task = {
+  id: string | number;
+  title: string;
+  description: string;
+  due_date?: string;
+  assigned_to_name?: string;
+  status: string;
+};
+
+interface TaskCardProps {
+  task: Task;
+  onStatusChange: (taskId: string | number, newStatus: string) => void;
+  onNotify: (taskId: string | number) => void;
+  onAddToAgenda: (taskId: string | number) => void;
+}
+
+export default function TaskCard({ task, onStatusChange, onNotify, onAddToAgenda }: TaskCardProps) {
   return (
     <div className="card task-card">
       <h3>{task.title}</h3>
