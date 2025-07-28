@@ -1,0 +1,158 @@
+/* Palette extraite du logo :
+   Rose : #EB4C6B
+   Jaune : #F7D154
+   Vert : #16B888
+   Bleu : #2B7BE6
+   Bleu clair : #6BDDFE
+*/
+
+:root {
+  --rose: #EB4C6B;
+  --jaune: #F7D154;
+  --vert: #16B888;
+  --bleu: #2B7BE6;
+  --bleu-clair: #6BDDFE;
+  --glass-bg: rgba(255,255,255,0.25);
+  --glass-blur: 18px;
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  --sidebar-width: 260px;
+  --sidebar-mobile: 60px;
+  --sidebar-color: var(--bleu);
+  --menu-hover: var(--rose);
+  --menu-active: var(--vert);
+  --text-main: #222;
+  --text-light: #fff;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bleu-clair) 0%, var(--jaune) 100%);
+  min-height: 100vh;
+  color: var(--text-main);
+}
+
+.layout-root {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 1rem 1.5rem 1rem;
+}
+
+.logo-img {
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px 0 rgba(43, 123, 230, 0.13);
+}
+
+.logo-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--bleu);
+  letter-spacing: 1px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0 0;
+  width: 100%;
+}
+
+.sidebar nav ul li {
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.8rem 2rem;
+  border-radius: 8px 0 0 8px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 1.08rem;
+  font-weight: 500;
+  transition: background 0.18s, color 0.18s;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background: var(--menu-hover);
+  color: var(--text-light);
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .sidebar {
+    width: var(--sidebar-mobile);
+    min-width: var(--sidebar-mobile);
+    padding: 0.6rem 0;
+  }
+  .logo-title {
+    display: none;
+  }
+  .main-content {
+    margin-left: var(--sidebar-mobile);
+    padding: 1rem;
+  }
+  .nav-link {
+    padding: 0.7rem 0.9rem;
+    font-size: 1rem;
+    text-align: left;
+  }
+}
+
+/* Glassmorphism for cards (utilisez cette classe dans vos pages) */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+
+/* Typography */
+h1, h2, h3 {
+  color: var(--bleu);
+  margin-top: 0;
+}
+
+a {
+  color: var(--bleu);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--rose);
+}
