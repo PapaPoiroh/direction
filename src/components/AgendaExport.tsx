@@ -1,6 +1,24 @@
 import React from 'react';
 
-export default function AgendaExport({ agendaItems, tasks }) {
+type AgendaItem = {
+  id: string | number;
+  task_id: string | number;
+  // Ajoute d'autres champs si besoin
+};
+
+type Task = {
+  id: string | number;
+  title: string;
+  status: string;
+  // Ajoute d'autres champs si besoin
+};
+
+interface AgendaExportProps {
+  agendaItems: AgendaItem[];
+  tasks: Task[];
+}
+
+export default function AgendaExport({ agendaItems, tasks }: AgendaExportProps) {
   return (
     <div>
       <h3>Ordre du jour</h3>
