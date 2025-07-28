@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { ReactNode } from 'react';
 
 const menuItems = [
   { label: 'Accueil', href: '/' },
@@ -10,7 +11,11 @@ const menuItems = [
   { label: 'Agenda', href: '/agenda' },
 ];
 
-export default function Layout({ children }) {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
   return (
     <div className="layout-root">
       <aside className="sidebar">
