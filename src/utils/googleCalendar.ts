@@ -1,16 +1,11 @@
-// Utilise OAuth2 côté client, refresh token côté serveur
-import { google } from 'googleapis';
+// Ce fichier ne doit plus contenir d'import Node.js
+// Remplace son contenu par un appel fetch vers l'API Next.js si tu as besoin côté client
 
 export async function addEventToGoogleCalendar(task, userOAuthToken) {
-  const calendar = google.calendar({ version: 'v3', auth: userOAuthToken });
-  await calendar.events.insert({
-    calendarId: 'primary',
-    requestBody: {
-      summary: task.title,
-      description: task.description,
-      start: { date: task.due_date },
-      end: { date: task.due_date },
-      attendees: [{ email: task.assigned_to_email }]
-    }
+  const response = await fetch('/api/addToCalendar', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ task, userOAuthToken }),
   });
+  return response.json();
 }
