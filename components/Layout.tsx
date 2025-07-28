@@ -1,48 +1,18 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { ReactNode } from 'react';
 
-const menuItems = [
-  { label: 'Accueil', href: '/' },
-  { label: 'Tableau de bord', href: '/dashboard' },
-  { label: 'Tâches', href: '/taches' },
-  { label: 'GED', href: '/ged' },
-  { label: 'Idées', href: '/idees' },
-  { label: 'Agenda', href: '/agenda' },
-];
-
-interface LayoutProps {
-  children: ReactNode;
-}
-
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="layout-root">
-      <aside className="sidebar">
-        <div className="logo-container">
-          <Image
-            src="/logo-stjean.png"
-            alt="Logo St Jean"
-            width={60}
-            height={60}
-            className="logo-img"
-            priority
-          />
-          <span className="logo-title">Direction St Jean</span>
-        </div>
-        <nav>
-          <ul>
-            {menuItems.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="nav-link">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </aside>
-      <main className="main-content">{children}</main>
+    <div>
+      <nav style={{padding: '1rem', borderBottom: '1px solid #eee', marginBottom: 20}}>
+        <Link href="/dashboard">Dashboard</Link> |{' '}
+        <Link href="/taches">Tâches</Link> |{' '}
+        <Link href="/agenda">Agenda</Link> |{' '}
+        <Link href="/utilisateurs">Utilisateurs</Link> |{' '}
+        <Link href="/ged">GED</Link> |{' '}
+        <Link href="/idees">Idées</Link> |{' '}
+        <Link href="/login">Se connecter</Link>
+      </nav>
+      <main style={{maxWidth: 900, margin: '0 auto'}}>{children}</main>
     </div>
   );
 }
